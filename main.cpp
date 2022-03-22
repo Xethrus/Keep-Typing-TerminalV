@@ -12,12 +12,7 @@ void makeVector(std::ifstream &inFile){
               std::back_inserter(allWords));
 }
 void typeWord(std::vector<std::string> currentVector){
-    std::cout << "Press \"0\" To exit" << std::endl;
-    int n = 0;
-    while(!GetKeyState('0'){
-        std::cout << "Please Type The word \"" << currentVector[n] << ": ";
-        
-    }
+    //TODO lol make this do stuff
 }
 
 int main(){
