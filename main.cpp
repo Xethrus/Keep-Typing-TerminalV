@@ -1,17 +1,15 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
+#include <iterator>
+#include <string>    
 
-class Word{
-    std::string wordToType;
-    Word(std::string wordToType);
-};
-void initWordVector(std::ifstream& inFile) {
-    std::vector<std::string> vectorOfWords;
-    std::string element;
-    while(inFile >> element) {
-        vectorOfWords.push_back(element);
-    }
+void makeVector(std::ifstream &inFile){
+    std::vector<std::string> allWords;
+    std::copy(std::istream_iterator<std::string>(inFile),
+              std::istream_iterator<std::string>(),
+              std::back_inserter(allWords));
 }
 
 int main(){
@@ -22,8 +20,8 @@ int main(){
         exit(1);
     }
     if(wordTextFile.is_open()) {
-        std::cout << wordTextFile.rdbuf();
-        initWordVector(wordTextFile);
+        //std::cout << wordTextFile.rdbuf();
+        makeVector(wordTextFile);
     }
     return 0;
 };
