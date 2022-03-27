@@ -59,8 +59,7 @@ int main(){
         printVector(allWords);
         shuffleVector(allWords); //not working for intended purpose
         printVector(allWords);
-
-
+        iterateAllWords(allWords); //not working for intended purpose LOL
     }
     return 0;
 };
