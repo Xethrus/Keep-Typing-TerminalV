@@ -6,60 +6,55 @@
 #include <iterator>
 #include <string>    
 
-void fillVector(std::ifstream &inFile, std::vector<std::string> &allWords){
-    std::copy(std::istream_iterator<std::string>(inFile),
-              std::istream_iterator<std::string>(),
-              std::back_inserter(allWords));
-}
-void shuffleVector(std::vector<std::string> &vectorToBeShuffled){
-    auto rng = std::default_random_engine {};
-    std::shuffle(std::begin(vectorToBeShuffled), std::end(vectorToBeShuffled), rng);
-}
-std::string getString(void){
-    std::string userString;
-    std::cout << "enter string" << std::endl;
-    std::cin >> userString;
-    return userString;
-}
-void typeWord(std::string inString, std::vector<std::string> vectorIndex,int counterIndex){
-    if(inString != vectorIndex[counterIndex]) {
-        std::cout << "incorrect spelling" << std::endl;
-    } else {
-        std::cout << "correct" << std::endl;
-    }
+//Global Functions
 
+//filling the vector with words from txt file
+void fillVector(std::ifstream &inFile, std::vector<std::string> &inVector) {
+   std::copy(std::istream_iterator<std::string>(inFile),
+             std::istream_iterator<std::string>(),
+             std::back_inserter(inVector));
 }
-void iterateAllWords(std::vector<std::string> &vectorToBeIterated){
-    int counterIndex = 0;
-    for (auto & element : vectorToBeIterated){
-        //TODO make this do the thing LOL (check if word typed)
-        counterIndex++;
-        typeWord(getString(),vectorToBeIterated,counterIndex);
-    }
+//shuffle the vector
+void shuffleTheVector(std::vector<std::string> &inVector) {
+   std::random_device rd;
+   std::mt19937 randomGen(rd());
+   std::shuffle(inVector.begin(), inVector.end(), randomGen);
 }
-void printVector(std::vector<std::string> vectorToBePrinted){
-    for (auto & element : vectorToBePrinted){
-        std::cout << element << std::endl;
-    }
+//print vector contents
+void printVector(std::vector<std::string> inVector) {
+   for(auto & word : inVector) {
+      std::cout << word << std::endl;
+   }
 }
 
-int main(){
-    std::ifstream wordTextFile;
-    wordTextFile.open("C:\\Users\\badmo\\Typing Project\\typedWord.txt");
-    if (!wordTextFile) {
-        std::cerr << "file \"typedWord.txt\" was unable to load/open" << std::endl;
-        exit(1);
-    }
-    if(wordTextFile.is_open()) {
-        std::cout << wordTextFile.rdbuf();
-        std::vector<std::string> allWords;
-        fillVector(wordTextFile, allWords);
-        
-        //testing things LOL
-        printVector(allWords);
-        shuffleVector(allWords); //not working for intended purpose
-        printVector(allWords);
-        iterateAllWords(allWords); //not working for intended purpose LOL
-    }
-    return 0;
-};
+
+//The main
+int main(void) {
+   //the inFile
+   std::ifstream fileOfWords;
+   //opening the file
+   fileOfWords.open("C:\\Users\\Stevi\\Desktop\\Projects\\KeyboardTypingTerminal\\typedWord.txt");
+   //Check if succesful
+      //not
+   if(!fileOfWords) {
+      std::cerr << "file was unable to load/open" << std::endl;
+      exit(1);
+   }
+      //is
+   if(fileOfWords.is_open()) {
+      //initilize vector for use
+      std::vector<std::string> vectorOfWords;
+      //fill
+      fillVector(fileOfWords, vectorOfWords);
+      //print for testing
+      printVector(vectorOfWords);
+      //shuffle for testing
+      shuffleTheVector(vectorOfWords);
+      printVector(vectorOfWords);
+      //
+
+   } 
+   return 0;
+}
+
+
