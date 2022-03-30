@@ -9,7 +9,6 @@
 //Global Functions
 
 //filling the vector with words from txt file 
-//TODO: this doesn't work LOL
 void fillVector(std::ifstream &inFile, std::vector<std::string> &inVector) {
    std::copy(std::istream_iterator<std::string>(inFile),
              std::istream_iterator<std::string>(),
