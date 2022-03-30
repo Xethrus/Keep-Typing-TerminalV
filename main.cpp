@@ -26,6 +26,24 @@ void printVector(std::vector<std::string> inVector) {
       std::cout << word << std::endl;
    }
 }
+//type the Word
+void typeWord(std::string stringIn) {
+   std::cout << ": ";
+   std::string userInput;
+   std::cin >> userInput;
+   while(userInput != stringIn) {
+      std::cout << "\n: ";
+      std::cin >> userInput;
+   }
+}
+//iterate vector
+void iterateVector(std::vector<std::string> inVector) {
+   for(auto & word : inVector) {
+      //TODO: do something LOL
+      std::cout << word << std::endl;
+      typeWord(word);
+   }
+}
 
 
 //The main
@@ -51,8 +69,8 @@ int main(void) {
       //shuffle for testing
       shuffleTheVector(vectorOfWords);
       printVector(vectorOfWords);
-      //
-
+      //testing run
+      iterateVector(vectorOfWords);   
    } 
    return 0;
 }
